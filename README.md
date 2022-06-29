@@ -1,16 +1,18 @@
 ---
 tags:
   - azure
+  - hashicorp
   - hcp-vault
   - hcp-terraform
-  - 
 alias:
-  - 
+  - HashiCorp Vault in Azure
 
 ---
 [[]]
 
-# AZURE / HCP VAULT 
+# HashiCorp Vault in Azure
+
+Utilizing off the shelf **TerraForm** providers and modules, stand up an instance of **Vault Enterprise** in **Azure**.
 
 | TOOL | TYPE | NAME | VERSION / BRANCH | NOTES |
 |------|------|------|---------|-------|
