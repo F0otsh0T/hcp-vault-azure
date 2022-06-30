@@ -12,9 +12,9 @@ alias:
 
 # Interoperability issues with TF-Module & TF-Provider
 
-TF-Module@**vault-ent-starter/azure**:v0.1.1 & TF-Provider@**azurerm**:v3.11.0 had some issues when used together.
+TF-Module @ **vault-ent-starter/azure**:v0.1.1 & TF-Provider @ **azurerm**:v3.11.0 had some issues when used together.
 
-#### VERSIONS
+## VERSIONS
 
 - **[prereqs_quickstart](roots/00-prereqs_quickstart)**:
   - Terraform: ">=0.15"
@@ -24,9 +24,9 @@ TF-Module@**vault-ent-starter/azure**:v0.1.1 & TF-Provider@**azurerm**:v3.11.0 h
   - Terraform: ">=0.13"
   - azurerm: "~>3.11.0"
 
-#### ERRORS
+## ERRORS
 
-###### 1. Upper/Lower Case
+#### 1. Upper/Lower Case
 
 ```shell
 ❯ terraform validate
@@ -74,7 +74,7 @@ TF-Module@**vault-ent-starter/azure**:v0.1.1 & TF-Provider@**azurerm**:v3.11.0 h
 
 Fixed above errors by editing the downloaded (via ```terraform init```) **Terraform** Modules (@**[registry.terraform.io](https://registry.terraform.io/modules/hashicorp/vault-ent-starter/azure/0.1.1)**) file ```.terraform/modules/vault-ent-starter/modules/iam/main.tf``` and changing first letter to **Upper Case**.
 
-###### 2. Missing Attributes
+#### 2. Missing Attributes
 
 - ```azurerm_application_gateway.vault.identity.type```
 - ```azurerm_application_gateway.vault.request_routing_rule.priority```
@@ -121,7 +121,7 @@ In the ```.terraform/modules/vault-ent-starter/modules/load_balancer/main.tf``` 
   }
 ```
 
-###### 3. Output
+#### 3. Output
 
 ```shell
 ❯ terraform validate
@@ -155,7 +155,7 @@ output "backend_address_pool_id" {
 
 The **ID** harvested in this step really should be keyed from the ```name``` attribute of the ```backend_address_pool``` as there could be more than one pool and the **ID** you want may not be from the first pool. Assumption is there is only one pool as this is a freshly created but this may not always be true.
 
-###### 4. Azure Permissions
+#### 4. Azure Permissions
 
 It appears that **[vault-ent-starter/azure]()** requires ***```Owner```*** level permissions.  Probably worth exploring the use of Azure ***```service principal```*** here.
 
@@ -173,7 +173,7 @@ It appears that **[vault-ent-starter/azure]()** requires ***```Owner```*** level
 
 For now, was able to have ***```Owner```*** level permissions granted to me to move past this error
 
-###### 5. Application Gateway Non-Zonal Public IP
+#### 5. Application Gateway Non-Zonal Public IP
 
 This problem appears to be a combination of **Azure** Region / Availability Zone Foilbles and **Terraform** Module-Provider interoperability issues. Depending on your **Azure** Region, you may or may not have multiple Availability Zones (or any AZ's for that matter) and currently **Azure** "[doesn't expose an automated means of determining which Azure Region supports which Availability Zones...](https://github.com/hashicorp/terraform-provider-azurerm/issues/16470#issuecomment-1104889806)" - manually reference them here @ https://azure.microsoft.com/en-us/global-infrastructure/geographies/#geographies
 
