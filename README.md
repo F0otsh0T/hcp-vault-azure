@@ -30,7 +30,7 @@ Based on the [vault-ent-starter/azure Module GitHub](https://github.com/hashicor
 
 ***OR***
 
-Use [~roots/Makefile](roots/Makefile) (WIP)
+Use [~/roots/Makefile](roots/Makefile) (WIP)
 
 ## TF-Provider + TF-Module Errors
 
