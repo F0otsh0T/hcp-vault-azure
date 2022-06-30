@@ -36,7 +36,29 @@ tf_az_prereqs: # target ## Terraform for Azure Prerequisite Resources Quickstart
 
 
 .PHONY: prereqs_harvest
-prereqs_harvest: # target ## Harvest vars from tf_az_prereqs to tf_az_vault.
+prereqs_harvest: # target ## [WIP] Harvest vars from tf_az_prereqs to tf_az_vault.
+	@cd roots/00-prereqs_quickstart && \
+		echo 'lb_backend_ca_cert = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.outputs.lb_backend_ca_cert.value')"' && \
+		echo 'lb_private_ip_address = "<Not in TF State>: Manually enter IP E.g. 10.0.2.253"' && \
+		echo 'lb_subnet_id  = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.outputs.lb_subnet_id.value')"' && \
+		echo 'leader_tls_servername  = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.outputs.leader_tls_servername.value')"' && \
+		echo 'vault_subnet_id  = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.outputs.vault_subnet_id.value')"' && \
+		echo 'key_vault_id  = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.outputs.key_vault_id.value')"' && \
+		echo 'key_vault_ssl_cert_secret_id  = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.outputs.key_vault_ssl_cert_secret_id.value')"' && \
+		echo 'key_vault_vm_tls_secret_id  = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.outputs.key_vault_vm_tls_secret_id.value')"' && \
+		echo 'resource_group.location  = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.root_module.resources[0].values.location')"' && \
+		echo 'resource_group.name  = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.root_module.resources[0].values.name')"' && \
+		echo 'resource_group.id  = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.root_module.resources[0].values.id')"' && \
+		echo 'resource_group = {\n  location = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.root_module.resources[0].values.location')"\n  name = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.root_module.resources[0].values.name')"\n  id = "$(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.root_module.resources[0].values.id')"\n}' && \
+		echo 'resource_name_prefix = "<Not in TF State>"' && \
+		echo 'ssh_public_key = "<Not in TF State: Input your SSH Public Key to access VMs in VMSS>"' && \
+		echo 'vault_application_security_group_ids  = $(shell cd roots/00-prereqs_quickstart && terraform show -json | jq -r '.values.outputs.vault_application_security_group_ids.value')' && \
+		echo 'vault_license_filepath = "<Not in TF State: Input Path to *.hclic File>"'
+
+
+
+.PHONY: test
+test: # taget ## [TEST] Test Target.
 	@cd roots/00-prereqs_quickstart && \
 	terraform show -json | jq -r '.values.outputs.lb_backend_ca_cert.value' && \
 	terraform show -json | jq -r '.values.outputs.lb_subnet_id.value' && \
