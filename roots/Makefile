@@ -18,19 +18,33 @@
 # 
 ########################
 default: help
-ACTION ?= plan
+ACTION ?= plan # Default Terraform Action
 
 ########################
 # CLEAN
 ########################
 .PHONY: clean
-clean: #target ## Housekeeping
+clean: #target ## Housekeeping.
 
 
+.PHONY: tf_az_prereqs
+tf_az_prereqs: # target ## Terraform for Azure Prerequisite Resources Quickstart.
+	$(call check_defined, ACTION, terraform action to perform)
+	@cd 00-prereqs_quickstart && \
+		terraform init && \
+		terraform $(ACTION)
 
 
+.PHONY: prereqs_harvest
+prereqs_harvest: # target ## Harvest vars from tf_az_prereqs to tf_az_vault.
+	test
 
-
+.PHONY: tf_az_vault
+tf_az_vault: # target ## Terraform for Azure Vault Enterprise
+	$(call check_defined, ACTION, terraform action to perform)
+	@cd 01-terraform-azure-ent-starter && \
+		terraform init && \
+		terraform $(ACTION)
 
 
 
@@ -48,8 +62,8 @@ clean: #target ## Housekeeping
 # REF GH @ jen20/hashidays-nyc/blob/master/terraform/GNUmakefile
 ########################
 .PHONY: help
-help: #target ## Display help for this Makefile (default target).
-	@echo "Valid targets:"
+help: #target ## [DEFAULT] Display help for this Makefile.
+	@echo "Valid make targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
 check_defined = \
