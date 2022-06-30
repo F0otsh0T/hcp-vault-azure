@@ -13,7 +13,7 @@ provider "azurerm" {
 
 module "vault-ent-starter" {
   source  = "hashicorp/vault-ent-starter/azure"
-  version = "0.1.1"
+  version = "~>0.1.1"
 
   # (Required when cert in 'key_vault_vm_tls_secret_id' is signed by a private CA) Certificate authority cert (PEM)
   lb_backend_ca_cert = file("./cacert.pem")
