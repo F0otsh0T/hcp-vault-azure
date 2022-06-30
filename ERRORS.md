@@ -28,6 +28,8 @@ TF-Module @ **vault-ent-starter/azure**:v0.1.1 & TF-Provider @ **azurerm**:v3.11
 
 #### 1. Upper/Lower Case
 
+###### ERROR:
+
 ```shell
 ❯ terraform validate
 ╷
@@ -72,12 +74,16 @@ TF-Module @ **vault-ent-starter/azure**:v0.1.1 & TF-Provider @ **azurerm**:v3.11
 ╵
 ```
 
+###### FIX:
+
 Fixed above errors by editing the downloaded (via ```terraform init```) **Terraform** Modules (@**[registry.terraform.io](https://registry.terraform.io/modules/hashicorp/vault-ent-starter/azure/0.1.1)**) file ```.terraform/modules/vault-ent-starter/modules/iam/main.tf``` and changing first letter to **Upper Case**.
 
 #### 2. Missing Attributes
 
 - ```azurerm_application_gateway.vault.identity.type```
 - ```azurerm_application_gateway.vault.request_routing_rule.priority```
+
+###### ERROR:
 
 ```shell
 ❯ terraform validate
@@ -98,6 +104,8 @@ Fixed above errors by editing the downloaded (via ```terraform init```) **Terraf
 │ The argument "priority" is required, but no definition was found.
 ╵
 ```
+
+###### FIX:
 
 In the ```.terraform/modules/vault-ent-starter/modules/load_balancer/main.tf``` file, added ```type = "UserAssigned"``` and ```priority = "1"``` into their respective stanzas:
 
@@ -123,6 +131,8 @@ In the ```.terraform/modules/vault-ent-starter/modules/load_balancer/main.tf``` 
 
 #### 3. Output
 
+###### ERROR:
+
 ```shell
 ❯ terraform validate
 ╷
@@ -144,6 +154,8 @@ In the ```.terraform/modules/vault-ent-starter/modules/load_balancer/main.tf``` 
 - https://github.com/MicrosoftDocs/azure-dev-docs/issues/752
 - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface_application_gateway_backend_address_pool_association
 
+###### FIX:
+
 Based on above information, changed ```.terraform/modules/vault-ent-starter/modules/load_balancer/outputs.tf``` to:
 
 ```HCL
@@ -160,6 +172,8 @@ The **ID** harvested in this step really should be keyed from the ```name``` att
 
 It appears that **[vault-ent-starter/azure]()** requires ***```Owner```*** level permissions.  Probably worth exploring the use of Azure ***```service principal```*** here.
 
+###### ERROR:
+
 ```shell
 ❯ terraform validate
 ╷
@@ -171,6 +185,8 @@ It appears that **[vault-ent-starter/azure]()** requires ***```Owner```*** level
 │ 
 ╵
 ```
+
+###### FIX:
 
 For now, was able to have ***```Owner```*** level permissions granted to me to move past this error
 
@@ -184,6 +200,8 @@ This problem appears to be a combination of **Azure** Region / Availability Zone
 - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/3.0-upgrade-guide#behavioural-updates
 - https://azure.microsoft.com/en-us/global-infrastructure/geographies/#geographies
 
+###### ERROR:
+
 ```shell
 ❯ terraform validate
 ╷
@@ -195,6 +213,8 @@ This problem appears to be a combination of **Azure** Region / Availability Zone
 │ 
 ╵
 ```
+
+###### FIX:
 
 In this particular case, Region is ```eastus``` so there are 3 ```zones``` to account for - added ```zones = [1,2,3]``` to ```.terraform/modules/vault-ent/modules/load_balancer/main.tf```:
 
