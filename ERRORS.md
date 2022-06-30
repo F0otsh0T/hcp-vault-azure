@@ -137,7 +137,8 @@ In the ```.terraform/modules/vault-ent-starter/modules/load_balancer/main.tf``` 
 ╵
 ```
 
-Reference Links Related to this problem:
+###### Reference Links Related to this problem:
+
 - https://github.com/hashicorp/terraform-provider-azurerm/issues/16855
 - https://github.com/MicrosoftDocs/azure-dev-docs/issues/770
 - https://github.com/MicrosoftDocs/azure-dev-docs/issues/752
@@ -177,7 +178,8 @@ For now, was able to have ***```Owner```*** level permissions granted to me to m
 
 This problem appears to be a combination of **Azure** Region / Availability Zone Foilbles and **Terraform** Module-Provider interoperability issues. Depending on your **Azure** Region, you may or may not have multiple Availability Zones (or any AZ's for that matter) and currently **Azure** "[doesn't expose an automated means of determining which Azure Region supports which Availability Zones...](https://github.com/hashicorp/terraform-provider-azurerm/issues/16470#issuecomment-1104889806)" - manually reference them here @ https://azure.microsoft.com/en-us/global-infrastructure/geographies/#geographies
 
-Reference Links:
+###### Reference Links:
+
 - https://github.com/hashicorp/terraform-provider-azurerm/issues/16470
 - https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/3.0-upgrade-guide#behavioural-updates
 - https://azure.microsoft.com/en-us/global-infrastructure/geographies/#geographies
