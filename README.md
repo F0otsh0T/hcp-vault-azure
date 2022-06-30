@@ -30,7 +30,24 @@ Based on the [vault-ent-starter/azure Module GitHub](https://github.com/hashicor
 
 ***OR***
 
-Use [~/roots/Makefile](roots/Makefile) (WIP)
+Use [~/Makefile](Makefile) (Work-in-Progress)
+
+```shell
+
+# terraform init && terraform plan
+make -f Makefile tf_az_prereqs
+# Check the plan
+
+# terraform apply
+make tf_az_prereqs ACTION=apply
+
+# terraform init && terraform plan
+make -f Makefile tf_az_vault
+# Check the plan
+
+# terraform apply
+make tf_az_vault ACTION=apply
+```
 
 ## TF-Provider + TF-Module Errors
 

@@ -30,19 +30,31 @@ clean: #target ## Housekeeping.
 .PHONY: tf_az_prereqs
 tf_az_prereqs: # target ## Terraform for Azure Prerequisite Resources Quickstart.
 	$(call check_defined, ACTION, terraform action to perform)
-	@cd 00-prereqs_quickstart && \
+	@cd roots/00-prereqs_quickstart && \
 		terraform init && \
 		terraform $(ACTION)
 
 
 .PHONY: prereqs_harvest
 prereqs_harvest: # target ## Harvest vars from tf_az_prereqs to tf_az_vault.
-	test
+	@cd roots/00-prereqs_quickstart && \
+	terraform show -json | jq -r '.values.outputs.lb_backend_ca_cert.value' && \
+	terraform show -json | jq -r '.values.outputs.lb_subnet_id.value' && \
+	terraform show -json | jq -r '.values.outputs.leader_tls_servername.value' && \
+	terraform show -json | jq -r '.values.outputs.vault_subnet_id.value' && \
+	terraform show -json | jq -r '.values.outputs.key_vault_id.value' && \
+	terraform show -json | jq -r '.values.outputs.key_vault_ssl_cert_secret_id.value' && \
+	terraform show -json | jq -r '.values.outputs.key_vault_vm_tls_secret_id.value' && \
+	terraform show -json | jq -r '.values.root_module.resources[0].values.location' && \
+	terraform show -json | jq -r '.values.root_module.resources[0].values.name' && \
+	terraform show -json | jq -r '.values.root_module.resources[0].values.id' && \
+	terraform show -json | jq -r '.values.outputs.vault_application_security_group_ids.value'
+
 
 .PHONY: tf_az_vault
 tf_az_vault: # target ## Terraform for Azure Vault Enterprise
 	$(call check_defined, ACTION, terraform action to perform)
-	@cd 01-terraform-azure-ent-starter && \
+	@cd roots/01-terraform-azure-ent-starter && \
 		terraform init && \
 		terraform $(ACTION)
 
