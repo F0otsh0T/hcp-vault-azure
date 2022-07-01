@@ -73,7 +73,7 @@ make -f Makefile tf_az_prereqs ACTION=apply
 ```shell
 make -f Makefile prereqs_harvest > roots/01-terraform-azure-ent-starter/vault.auto.tfvars
 ```
-Some of the variable values will need your manual input as they are not all retrievable from the TFState in the Prerequisite ```~/roots/00-prereqs_quickstart``` WorkSpace
+Some of the variable values in the output @ ```~/roots/01-terraform-azure-ent-starter/vault.auto.tfvars``` will need your manual input as they are not all retrievable from the TFState in the Prerequisite ```~/roots/00-prereqs_quickstart``` WorkSpace
 
 ###### Instantiate Vault Enterprise in Azure
 
