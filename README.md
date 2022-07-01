@@ -25,8 +25,28 @@ Utilizing off-the-shelf **TerraForm** providers and modules, stand up an instanc
 Based on the [vault-ent-starter/azure Module GitHub](https://github.com/hashicorp/terraform-azure-vault-ent-starter) documentation @ "[How to Use this Module](https://github.com/hashicorp/terraform-azure-vault-ent-starter#how-to-use-this-module)":
 
 1. Ensure **Azure** credentials [in place](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#authenticating-to-azure). 
-2. Use [~/roots/00-prereqs_quickstart](roots/00-prereqs_quickstart/README.md) in this repo (or pull this directory from [GitHub](https://github.com/hashicorp/terraform-azure-vault-ent-starter/tree/main/examples/prereqs_quickstart)) to spin up **Azure** Resources to support Vault
-3. Use [~/roots/01-terraform-azure-ent-starter](roots/01-terraform-azure-ent-starter/README.md) to spin up **HashiCorp** Vault as the module has been corrected as per [~/ERRORS.md](ERRORS.md).
+2. Use [~/roots/00-prereqs_quickstart](roots/00-prereqs_quickstart/README.md) **Terraform** WorkSpace in this repo (or pull this directory from [GitHub](https://github.com/hashicorp/terraform-azure-vault-ent-starter/tree/main/examples/prereqs_quickstart)) to spin up **Azure** Resources to support Vault
+   ```shell
+   cd roots/00-prereqs_quickstart/
+
+   terraform init
+
+   terraform plan
+
+   terraform apply
+
+   ```
+3. Use [~/roots/01-terraform-azure-ent-starter](roots/01-terraform-azure-ent-starter/README.md) **Terraform** WorkSpace to spin up **HashiCorp** **Vault** as the module has been corrected as per [~/ERRORS.md](ERRORS.md).
+   ```shell
+   cd roots/01-terraform-azure-ent-starter/
+
+   terraform init
+
+   terraform plan
+
+   terraform apply
+   
+   ```
 
 ***OR***
 
@@ -53,7 +73,7 @@ make -f Makefile tf_az_prereqs ACTION=apply
 ```shell
 make -f Makefile prereqs_harvest > roots/01-terraform-azure-ent-starter/vault.auto.tfvars
 ```
-Some of the variables will need your manual input as they are not retrievable from the TFState from the Prerequisite ```~/roots/00-prereqs_quickstart``` WorkSpace
+Some of the variable values in the output @ ```~/roots/01-terraform-azure-ent-starter/vault.auto.tfvars``` will need your manual input as they are not all retrievable from the TFState in the Prerequisite ```~/roots/00-prereqs_quickstart``` WorkSpace
 
 ###### Instantiate Vault Enterprise in Azure
 
