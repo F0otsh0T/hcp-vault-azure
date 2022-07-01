@@ -26,7 +26,27 @@ Based on the [vault-ent-starter/azure Module GitHub](https://github.com/hashicor
 
 1. Ensure **Azure** credentials [in place](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#authenticating-to-azure). 
 2. Use [~/roots/00-prereqs_quickstart](roots/00-prereqs_quickstart/README.md) in this repo (or pull this directory from [GitHub](https://github.com/hashicorp/terraform-azure-vault-ent-starter/tree/main/examples/prereqs_quickstart)) to spin up **Azure** Resources to support Vault
+   ```shell
+   cd roots/00-prereqs_quickstart/
+
+   terraform init
+
+   terraform plan
+
+   terraform apply
+
+   ```
 3. Use [~/roots/01-terraform-azure-ent-starter](roots/01-terraform-azure-ent-starter/README.md) to spin up **HashiCorp** Vault as the module has been corrected as per [~/ERRORS.md](ERRORS.md).
+   ```shell
+   cd roots/01-terraform-azure-ent-starter/
+
+   terraform init
+
+   terraform plan
+
+   terraform apply
+   
+   ```
 
 ***OR***
 
