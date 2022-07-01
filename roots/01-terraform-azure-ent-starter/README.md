@@ -57,3 +57,65 @@ alias:
     ```
 6. Connect Browser to **Vault** GUI. SSH client can ```port-forward``` and act as sort of a **SOCKS** Proxy. Fire up your web browser and point it to ***https://127.0.0.1:<LOCAL_PORT>*** (where <LOCAL_PORT> is the same as you specified in the ```ssh``` command in **Step 5** above.)
 
+## Vault Init and Unseal
+
+```shell
+$ vault status
+Key                      Value
+---                      -----
+Recovery Seal Type       azurekeyvault
+Initialized              false
+Sealed                   true
+Total Recovery Shares    0
+Threshold                0
+Unseal Progress          0/0
+Unseal Nonce             n/a
+Version                  1.8.1+ent
+Storage Type             raft
+HA Enabled               true
+
+$ vault operator init -format=json -t 1 -n 1 | tee keys.json
+{
+  "unseal_keys_b64": [],
+  "unseal_keys_hex": [],
+  "unseal_shares": 1,
+  "unseal_threshold": 1,
+  "recovery_keys_b64": [
+    "Loremipsumdolorsitametconsecteturadipiscinge",
+    "litExpectoquequidadidquodquaerebamrespondeas",
+    "ProfectusinexiliumTubulusstatimnecrespondere",
+    "aususDuoRegesconstructiointerreteHicnihilfui",
+    "tquodquaereremusSedilleutdixivitioseNonautem"
+  ],
+  "recovery_keys_hex": [
+    "LoremipsumdolorsitametconsecteturadipiscingelitExpectoquequidadidq",
+    "uodquaerebamrespondeasProfectusinexiliumTubulusstatimnecrespondere",
+    "aususDuoRegesconstructiointerreteHicnihilfuitquodquaereremusSedill",
+    "eutdixivitioseNonautemhocigiturneilludquidemAgeinquiesistaparvasun",
+    "tQuemTiberinadescensiofestoillodietantogaudioaffecitquantoLSempere"
+  ],
+  "recovery_keys_shares": 5,
+  "recovery_keys_threshold": 3,
+  "root_token": "s.Loremipsumdolorsitametco"
+}
+
+$ vault status
+Key                      Value
+---                      -----
+Recovery Seal Type       shamir
+Initialized              true
+Sealed                   false
+Total Recovery Shares    5
+Threshold                3
+Version                  1.8.1+ent
+Storage Type             raft
+Cluster Name             vault-cluster-69d483f0
+Cluster ID               99916931-5963-3683-e477-2957233a13e0
+HA Enabled               true
+HA Cluster               https://10.0.1.4:8201
+HA Mode                  active
+Active Since             2022-07-01T03:13:51.080720778Z
+Raft Committed Index     1050
+Raft Applied Index       1050
+Last WAL                 9
+```
