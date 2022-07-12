@@ -12,6 +12,8 @@ alias:
 
 # HashiCorp Vault in Azure
 
+***CAVEAT***: Many of the issues documented here in the previous version of the `vault-ent-starter` module for Azure has been resolved in version **1.0.0** @ https://registry.terraform.io/modules/hashicorp/vault-ent-starter/azure/1.0.0
+
 Utilizing off-the-shelf **TerraForm** providers and modules, stand up an instance of **Vault Enterprise** in **Azure**.
 
 | TOOL | TYPE | NAME | VERSION / BRANCH | NOTES |
